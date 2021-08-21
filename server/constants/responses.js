@@ -10,4 +10,5 @@ module.exports = {
     loginUserFailed: 1105,
     userNotFound: 1106,
     incorrectCredentials: 1107,
+    invalidUserId: 1108,
 };

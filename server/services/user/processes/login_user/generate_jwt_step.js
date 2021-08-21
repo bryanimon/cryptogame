@@ -8,7 +8,6 @@ const jwt = require('jsonwebtoken');
 class GenerateJwtStep extends ProcessChainBlock {
   async execute(context) {
     try{
-      // get config vars
       dotenv.config();
       process.env.TOKEN_SECRET = require('crypto').randomBytes(64).toString('hex');
       var token = this.generateAccessToken(context.getProperty('user').username);

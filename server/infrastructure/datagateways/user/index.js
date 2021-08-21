@@ -1,44 +1,35 @@
 'use strict';
 
-var database = require('../../database');
-
-function loginUser(req, res) {
-    res.json("login");
-}
+var { MongoClient } = require('mongodb');
 
 async function registerUser(request, userId, passwordHash) {
-  var connection = database.getConnection();
-  var sql = `INSERT INTO users (id, username, password) VALUES ('${userId}', '${request.body.username}', '${passwordHash}')`;
-  connection.query(sql, 
-    (err, result) => {
-      if (err) {
-        throw err;
-      } else {
-        return result;
-      }
-    }
-  );
+  const client = new MongoClient(process.env.DB_CONNECTION_STRING);
+  var user = { username : request.body.username, userId: userId, passwordHash: passwordHash };
+
+  try {
+    await client.connect();
+    await client.db('cryptogame').collection('users').insertOne(user);
+    client.close();
+  } catch (error) {
+    throw error;
+  }
 }
 
 async function getUserByUsername(username) {
-  return new Promise(
-    (resolve, reject) => {
-      var connection = database.getConnection();
-      var sql = `SELECT * FROM users WHERE username = '${username}' LIMIT 1`;
-      connection.query(sql, function (error, result) {
-          if (error) {
-            reject(error)
-          } else {
-            resolve(result[0]);
-          }
-        }
-      );
-    }
-  );
+  const client = new MongoClient(process.env.DB_CONNECTION_STRING);
+
+  try {
+    await client.connect();
+    const user = await client.db('cryptogame').collection('users').findOne({ username: username });
+    client.close();
+
+    return user;
+  } catch (error) {
+    throw error;
+  }
 }
 
 module.exports = {
-    loginUser: loginUser,
     registerUser: registerUser,
     getUserByUsername : getUserByUsername
 };

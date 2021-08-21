@@ -8,7 +8,7 @@ class ValidatePasswordStep extends ProcessChainBlock {
   async execute(context) {
     try {
       var user = context.getProperty('user');
-      if (!bcrypt.compareSync(context.request.body.password, user.password)) {
+      if (!bcrypt.compareSync(context.request.body.password, user.passwordHash)) {
         context.response.status(400).json({message: { errorCode: responses.incorrectCredentials }});
       }
     } catch (error) {
