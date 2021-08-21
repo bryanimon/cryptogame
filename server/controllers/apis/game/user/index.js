@@ -26,16 +26,12 @@ router.post(
         errorCode: responses.invalidEmail,
       }
     ),
-    body('username').custom(value => {
-      return userDataGateway.getUserByUsername(value)
-        .then(user => {
-            if (user) {
-              return Promise.reject();
-            }
-          }   
-        );
+    body('username').custom(async value => {
+      const user = await userDataGateway.getUserByUsername(value);
+      if (user) {
+        return Promise.reject();
       }
-    ).withMessage(
+    }).withMessage(
       {
         message: 'Email already in use',
         errorCode: responses.emailAlreadyUsed,

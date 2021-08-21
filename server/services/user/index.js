@@ -2,9 +2,8 @@
 
 const { body, validationResult } = require('express-validator');
 var userProcessFactory = require('./processes');
-var RegisterUserContext = require('../../services/user/processes/register_user/register_user_context.js');
-var LoginUserContext = require('../../services/user/processes/login_user/login_user_context.js');
 const responses = require('../../constants/responses');
+const Context = require('../../infrastructure/process/context');
 
 async function loginUser(request, response) {
   const errors = validationResult(request);
@@ -18,7 +17,7 @@ async function loginUser(request, response) {
   } else {
     try {
       var process = userProcessFactory.createLoginUserProcess();
-      var context = new LoginUserContext(request, response);
+      var context = new Context(request, response);
       await process.execute(context);
       context.response.json(
         { 
@@ -48,7 +47,7 @@ async function registerUser(request, response) {
   } else {
     try {
       var process = userProcessFactory.createRegisterUserProcess();
-      var context = new RegisterUserContext(request, response);
+      var context = new Context(request, response);
       await process.execute(context);
       context.response.json(
         {
