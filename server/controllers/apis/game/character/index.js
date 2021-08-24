@@ -1,8 +1,8 @@
 'use strict';
 
 const express = require('express');
-const { body, validationResult } = require('express-validator');
-const responses = require('../../../../constants/responses');
+const { body, param, validationResult } = require('express-validator');
+const responses = require('../../../../shared/responses');
 const characterService = require('../../../../services/character');
 
 let router = express.Router();
@@ -15,6 +15,11 @@ router.post('/create',
     }
   ),
   characterService.createCharacter
+);
+
+router.get('/characters',
+
+  characterService.getCharactersByUserId
 );
 
 module.exports = router;

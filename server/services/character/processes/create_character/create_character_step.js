@@ -1,22 +1,49 @@
 'use strict';
 
 const ProcessChainBlock = require('../../../../infrastructure/process/process_chain_block.js');
-const responses = require('../../../../constants/responses');
-const dotenv = require('dotenv');
-const jwt = require('jsonwebtoken');
+const characterDataGateway = require('../../../../infrastructure/datagateways/character');
+const elementDataGateway = require('../../../../infrastructure/datagateways/element');
+const constants = require('../../../../shared/constants');
 
-class GenerateRandomCharacter extends ProcessChainBlock {
+class CreateCharacterStep extends ProcessChainBlock {
   async execute(context) {
-    try{
-      // Random select in array
-      // Random select in type
-      // Instantiate new character model
-      // Assign name
+    try {
+      const characterTypes = await characterDataGateway.getAllCharacterTypes();
+      const elementTypes = await elementDataGateway.getAllElementTypes();
+
+      if (characterTypes.length > 0 && elementTypes.length > 0) {
+        const selectedCharacterType = characterTypes[this.getRandomNumber(characterTypes.length)];
+        const mainElementType = elementTypes[this.getRandomNumber(elementTypes.length)];
+
+        var subElements = [];
+        for (let i = 0; i < constants.maxSubElements; i++) {
+          const element = elementTypes[this.getRandomNumber(elementTypes.length)];
+          subElements.push(element);
+        }
+
+        const character = {
+          name : `${mainElementType.name} ${selectedCharacterType.name}`,
+          elementType : mainElementType,
+          subElements : subElements,
+          exp : 0,
+          dateCreated: new Date(),
+          ownerId : context.request.body.userId 
+        };
+
+        context.setProperty('character', character);
+      }
     } catch (error) {
       throw error;
     }
+
     return await this.executeNext(context);
+  }
+
+  getRandomNumber(maximum) {
+    const min = Math.ceil(0);
+    const max = Math.floor(maximum - 1);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 }
 
-module.exports = GenerateRandomCharacter;
+module.exports = CreateCharacterStep;

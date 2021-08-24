@@ -1,10 +1,12 @@
 'use strict';
 
-const GetAllCharacterTypesStep = require('./create_character/get_all_elements_step');
+const CreateCharacterStep = require('./create_character/create_character_step');
+const InsertCharacterStep = require('./create_character/insert_character_step');
 
 function createCreateCharacterProcess() {
-    var block = new GetAllCharacterTypesStep();
-    
+    var block = new CreateCharacterStep();
+
+    block.setNextBlock(new InsertCharacterStep());
     return block;
 }
 module.exports = {

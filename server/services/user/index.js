@@ -2,7 +2,7 @@
 
 const { body, validationResult } = require('express-validator');
 var userProcessFactory = require('./processes');
-const responses = require('../../constants/responses');
+const responses = require('../../shared/responses');
 const Context = require('../../infrastructure/process/context');
 
 async function loginUser(request, response) {

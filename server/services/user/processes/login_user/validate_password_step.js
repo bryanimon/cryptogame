@@ -1,7 +1,7 @@
 'use strict';
 
 const ProcessChainBlock = require('../../../../infrastructure/process/process_chain_block.js');
-const responses = require('../../../../constants/responses');
+const responses = require('../../../../shared/responses');
 const bcrypt = require('bcrypt');
 
 class ValidatePasswordStep extends ProcessChainBlock {
