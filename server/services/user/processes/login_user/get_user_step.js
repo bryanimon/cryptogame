@@ -2,7 +2,7 @@
 
 const ProcessChainBlock = require('../../../../infrastructure/process/process_chain_block.js');
 const userDataGateway = require('../../../../infrastructure/datagateways/user');
-const responses = require('../../../../constants/responses');
+const responses = require('../../../../shared/responses');
 
 class GetUserStep extends ProcessChainBlock {
   async execute(context) {

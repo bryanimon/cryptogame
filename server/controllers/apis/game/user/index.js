@@ -2,7 +2,7 @@
 
 const express = require('express');
 const { body, validationResult } = require('express-validator');
-const responses = require('../../../../constants/responses');
+const responses = require('../../../../shared/responses');
 const userService = require('../../../../services/user');
 const userDataGateway = require('../../../../infrastructure/datagateways/user');
 

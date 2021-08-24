@@ -1,7 +1,7 @@
 'use strict';
 
 const ProcessChainBlock = require('../../../../infrastructure/process/process_chain_block.js');
-const responses = require('../../../../constants/responses');
+const responses = require('../../../../shared/responses');
 const dotenv = require('dotenv');
 const jwt = require('jsonwebtoken');
 

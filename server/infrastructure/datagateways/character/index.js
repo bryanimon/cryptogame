@@ -1,21 +1,34 @@
 'use strict';
 
-var database = require('../../database');
+var { MongoClient } = require('mongodb');
 
-async function getCharacterTypes() {
-  var connection = database.getConnection();
-  var sql = `SELECT * FROM character_types`;
-  connection.query(sql, 
-    (err, result) => {
-      if (err) {
-        throw err;
-      } else {
-        return result;
-      }
-    }
-  );
+async function getAllCharacterTypes() {
+  const client = new MongoClient(process.env.DB_CONNECTION_STRING);
+
+  try {
+    await client.connect();
+    const characterTypes = await client.db('cryptogame').collection('character_types').find({}).toArray();
+    client.close();
+    return characterTypes;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function getAllCharactersByUserId(userId) {
+  const client = new MongoClient(process.env.DB_CONNECTION_STRING);
+
+  try {
+    await client.connect();
+    const characters = await client.db('cryptogame').collection('characters').find({ ownerId: userId }).toArray();
+    client.close();
+    return characters;
+  } catch (error) {
+    throw error;
+  }
 }
 
 module.exports = {
-  getCharacterTypes: getCharacterTypes,
+  getAllCharacterTypes: getAllCharacterTypes,
+  getAllCharactersByUserId: getAllCharactersByUserId
 };
