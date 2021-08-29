@@ -1,6 +1,6 @@
 'use strict';
 
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 var ProcessChainBlock = require('../../../../infrastructure/process/process_chain_block.js');
 
 class HashPasswordStep extends ProcessChainBlock {
