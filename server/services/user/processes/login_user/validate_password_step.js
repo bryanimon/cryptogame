@@ -2,7 +2,7 @@
 
 const ProcessChainBlock = require('../../../../infrastructure/process/process_chain_block.js');
 const responses = require('../../../../shared/responses');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 class ValidatePasswordStep extends ProcessChainBlock {
   async execute(context) {
