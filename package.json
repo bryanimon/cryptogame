@@ -1,28 +1,36 @@
 {
-  "name": "express-env-sample",
+  "name": "cryptogame",
   "version": "1.0.0",
+  "description": "<h3>To run:</h3>\r <p>install node.js</p>\r <p>run <b>npm install</b> on git/terminal</p>\r <p>run <b>nodemon index.js</b></p>",
   "main": "index.js",
-  "scripts": {
-    "start": "node index.js"
-  },
-  "engines": {
-    "node": "^4.2.0"
-  },
-  "author": "Bryan Layderos",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
-    "body-parser": "^1.16.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "express-handlebars": "^3.0.0",
     "express-validator": "^6.12.1",
     "jsonwebtoken": "^8.5.1",
-    "lodash": "^4.17.4",
     "mongodb": "^4.1.0",
     "mysql": "^2.18.1",
     "node-input-validator": "^4.4.1",
     "nodemon": "^2.0.12",
     "uuid": "^8.3.2"
-  }
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bryanimon/cryptogame.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bryanimon/cryptogame/issues"
+  },
+  "homepage": "https://github.com/bryanimon/cryptogame#readme"
 }
