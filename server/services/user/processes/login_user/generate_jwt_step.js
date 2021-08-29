@@ -1,7 +1,6 @@
 'use strict';
 
 const ProcessChainBlock = require('../../../../infrastructure/process/process_chain_block.js');
-const responses = require('../../../../shared/responses');
 const dotenv = require('dotenv');
 const jwt = require('jsonwebtoken');
 
@@ -10,7 +9,8 @@ class GenerateJwtStep extends ProcessChainBlock {
     try{
       dotenv.config();
       process.env.TOKEN_SECRET = require('crypto').randomBytes(64).toString('hex');
-      var token = this.generateAccessToken(context.getProperty('user').username);
+
+      const token = this.generateAccessToken(context.getProperty('user').username);
       context.setProperty('token', token);
     } catch (error) {
       throw error;
