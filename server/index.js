@@ -35,7 +35,7 @@ module.exports = function() {
         let hostname = server.get('hostname'),
             port = server.get('port');
         process.env.DB_CONNECTION_STRING = "mongodb+srv://bryanimon:bryan1A!@cluster0.sodrk.mongodb.net/cryptogame?retryWrites=true&w=majority";
-        server.listen(port, function () {
+        server.listen(process.env.PORT || port, function () {
             console.log('Express server listening on - http://' + hostname + ':' + port);
         });
     };
