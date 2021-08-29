@@ -4,7 +4,6 @@
   "description": "<h3>To run:</h3>\r <p>install node.js</p>\r <p>run <b>npm install</b> on git/terminal</p>\r <p>run <b>nodemon index.js</b></p>",
   "main": "index.js",
   "dependencies": {
-    "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
