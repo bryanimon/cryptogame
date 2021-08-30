@@ -21,9 +21,7 @@ async function createCharacter(request, response) {
       var context = new Context(request, response);
       await process.execute(context);
       context.response.json({ 
-          data : {
-            character: context.getProperty('character')
-          },
+          data : context.getProperty('character'),
           statusCode: responses.insertCharacterSuccess,
         }
       );
