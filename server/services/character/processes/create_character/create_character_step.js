@@ -25,6 +25,7 @@ class CreateCharacterStep extends ProcessChainBlock {
 
         const character = {
           name : `${mainElementType.name} ${selectedCharacterType.name}`,
+          characterType: selectedCharacterType,
           elementType : mainElementType,
           subElements : subElements,
           exp : 0,
